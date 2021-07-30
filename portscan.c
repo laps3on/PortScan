@@ -7,33 +7,33 @@
 
 int main(int argc, char*argv[])
 {
-        int meusocket;
-        int conecta;
-        int inicio = 0;
-        int final = 65535;
+        int msocket;
+        int con;
+        int init = 0;
+        int end = 65535;
         int port;
         char *destiny;
         destiny = argv[1];
 
-        struct sockaddr_in alvo;
+        struct sockaddr_in target;
 
-        for(port=inicio;port<final;port++)
+        for(port=init;port<end;port++)
         {
-        meusocket  = socket(AF_INET, SOCK_STREAM, 0);
-        alvo.sin_family = AF_INET;
-        alvo.sin_port = htons(port);
-        alvo.sin_addr.s_addr = inet_addr(destiny);
+        msocket  = socket(AF_INET, SOCK_STREAM, 0);
+        target.sin_family = AF_INET;
+        target.sin_port = htons(port);
+        target.sin_addr.s_addr = inet_addr(destiny);
 
-        conecta = connect(meusocket, (struct sockaddr *)&alvo, sizeof alvo);
+        con = connect(msocket, (struct sockaddr *)&target, sizeof target);
 
-        if(conecta == 0)
+        if(con == 0)
         {
                 printf("Port %d - STATUS[OPEN]\n", port);
-                close(meusocket);
-                close(conecta);
+                close(msocket);
+                close(con);
         }else{
-                close(meusocket);
-                close(conecta);
+                close(msocket);
+                close(con);
         }
         }
 }
